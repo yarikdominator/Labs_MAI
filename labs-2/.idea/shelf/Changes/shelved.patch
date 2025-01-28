@@ -1,0 +1,83 @@
+Index: mian.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/***********************************************************************************\n*                       Курс КОМПЬЮТЕРНЫЕ ТЕХНОЛОГИИ                               *\n*----------------------------------------------------------------------------------*\n* Project Type  : Win64 Console Application                                        *\n* Project Name  : Labs2                                                            *\n* File Name     : Labs2.exe                                                        *\n* Language      : CPP, MSVS 2022                                                   *\n* Programmers   : Тихонов Павел Сергеевич, Ефимов Ярослав Сергеевич, М3О-119БB-24  *\n* Modifyed By   :                                                                  *\n* Created       : 05.11.2024                                                       *\n* Last Revision : 08.11.2024                                                       *\n* Comment(s)    : Вычисление суммы бесконечного числового ряда                     *\n***********************************************************************************/\n\n#include <iostream>\n#include <iomanip>  // Для манипуляторов вывода\n#include <cmath>    // Для функций sin и cos\n\nusing namespace std;\n//TODO: Исправить таблицу\nint main() {\n    // Вводим значения A, B и N\n    double A ;  // Исходное значение A = -π/4\n    double B ;   // Исходное значение B = π/2\n    int N ;// Исходное значение N = 15\n    cout<< \"Введите A:\";\n    cin>> A;\n    cout<< \"Введите B:\";\n    cin>> B;\n    cout<< \"Введите N:\";\n    cin>> N;\n    cout<<\"A:\"<<A<<\" \"<<\"B:\"<<B<<\" \"<<\"N:\"<<N<<endl;\n\n    // Проверка на корректность N\n    if (N <= 0) {\n        cout << \"Ошибка: N должно быть > 0\" << endl;\n        return 0;\n    }\n\n    // Проверка на равенство A и B\n    if (A == B) {\n        cout << \"Ошибка: A не должно быть равно B\" << endl;\n        return 0;\n    }\n\n    // Проверка на положительное значение длины интервала\n    if (A > B) {\n        double C = A;\n        A=B;\n        B=C;\n    }\n\n    // Вычисляем шаг h\n    double h = (B - A) / N;\n\n    // Заголовок таблицы с рамкой\n    cout << \"+\" << setw(5) << setfill('-') << \"-\"\n         << \"+\" << setw(15) << setfill('-') << \"-\"\n         << \"+\" << setw(25) << setfill('-') << \"-\"\n         << \"+\" << setw(25) << setfill('-') << \"-\" << \"+\" << endl;\n\n    cout << \"| \" << left << setw(3) << setfill(' ') << \"i\" << \" | \"\n         << setw(13) << \"x\" << \" | \"\n         << setw(23) << \"F(x) = sin(x) * cos(x)\" << \" | \"\n         << setw(23) << \"G(x) = 2 * sin(2 * x) + 1\" << \" |\" << endl;\n\n    cout << \"+\" << setw(5) << setfill('-') << \"-\"\n         << \"+\" << setw(15) << setfill('-') << \"-\"\n         << \"+\" << setw(25) << setfill('-') << \"-\"\n         << \"+\" << setw(25) << setfill('-') << \"-\" << \"+\" << endl;\n\n    // Цикл табулирования значений\n    for (int i = 0; i <= N; ++i) {\n        double x = A + i * h;\n        double F = sin(x) * cos(x);\n        double G = 2 * sin(2 * x) + 1;\n\n        // Выводим результат в табличном формате с рамкой\n        cout << \"| \" << left << setw(3) << setfill(' ') << i << \" | \"\n             << setw(13) << fixed << setprecision(6) << x << \" | \"\n             << setw(23) << fixed << setprecision(6) << F << \" | \"\n             << setw(23) << fixed << setprecision(6) << G << \" |\" << endl;\n    }\n\n    // Нижняя граница таблицы\n    cout << \"+\" << setw(5) << setfill('-') << \"-\"\n         << \"+\" << setw(15) << setfill('-') << \"-\"\n         << \"+\" << setw(25) << setfill('-') << \"-\"\n         << \"+\" << setw(25) << setfill('-') << \"-\" << \"+\" << endl;\n\n    return 0;\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/mian.cpp b/mian.cpp
+--- a/mian.cpp	(revision f82bc3a2aafb5d51c78d5d2c971febf14105076d)
++++ b/mian.cpp	(date 1731256524680)
+@@ -9,7 +9,7 @@
+ * Modifyed By   :                                                                  *
+ * Created       : 05.11.2024                                                       *
+ * Last Revision : 08.11.2024                                                       *
+-* Comment(s)    : Вычисление суммы бесконечного числового ряда                     *
++* Comment(s)    : Табулирование функций                    *
+ ***********************************************************************************/
+ 
+ #include <iostream>
+@@ -20,7 +20,7 @@
+ //TODO: Исправить таблицу
+ int main() {
+     // Вводим значения A, B и N
+-    double A ;  // Исходное значение A = -π/4
++    double A;  // Исходное значение A = -π/4
+     double B ;   // Исходное значение B = π/2
+     int N ;// Исходное значение N = 15
+     cout<< "Введите A:";
+@@ -45,11 +45,11 @@
+ 
+     // Проверка на положительное значение длины интервала
+     if (A > B) {
+-        double C = A;
+-        A=B;
+-        B=C;
++        cout<< "Ошибка: A не должно быть больше B";
++        return 0;
+     }
+-
++    //ВЫВОД ОТРЕЗКА
++    cout<<"Отрезок: "<<"["<<A<<";"<<B<<"]"<<endl;
+     // Вычисляем шаг h
+     double h = (B - A) / N;
+ 
+@@ -57,17 +57,17 @@
+     cout << "+" << setw(5) << setfill('-') << "-"
+          << "+" << setw(15) << setfill('-') << "-"
+          << "+" << setw(25) << setfill('-') << "-"
+-         << "+" << setw(25) << setfill('-') << "-" << "+" << endl;
++         << "+" << setw(27) << setfill('-') << "-" << "+" << endl;
+ 
+     cout << "| " << left << setw(3) << setfill(' ') << "i" << " | "
+          << setw(13) << "x" << " | "
+          << setw(23) << "F(x) = sin(x) * cos(x)" << " | "
+-         << setw(23) << "G(x) = 2 * sin(2 * x) + 1" << " |" << endl;
++         << setw(23) << "G(x) = 2 * sin(2 * x) + 1" << " | " << endl;
+ 
+     cout << "+" << setw(5) << setfill('-') << "-"
+          << "+" << setw(15) << setfill('-') << "-"
+          << "+" << setw(25) << setfill('-') << "-"
+-         << "+" << setw(25) << setfill('-') << "-" << "+" << endl;
++         << "+" << setw(27) << setfill('-') << "-" << "+" << endl;
+ 
+     // Цикл табулирования значений
+     for (int i = 0; i <= N; ++i) {
+@@ -79,14 +79,14 @@
+         cout << "| " << left << setw(3) << setfill(' ') << i << " | "
+              << setw(13) << fixed << setprecision(6) << x << " | "
+              << setw(23) << fixed << setprecision(6) << F << " | "
+-             << setw(23) << fixed << setprecision(6) << G << " |" << endl;
++             << setw(23) << fixed << setprecision(6) << G << "   | " << endl;
+     }
+ 
+     // Нижняя граница таблицы
+     cout << "+" << setw(5) << setfill('-') << "-"
+          << "+" << setw(15) << setfill('-') << "-"
+          << "+" << setw(25) << setfill('-') << "-"
+-         << "+" << setw(25) << setfill('-') << "-" << "+" << endl;
++         << "+" << setw(27) << setfill('-') << "-" << "+" << endl;
+ 
+     return 0;
+ }
+\ No newline at end of file
